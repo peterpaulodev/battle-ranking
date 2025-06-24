@@ -43,9 +43,10 @@ model Edicao {
 
 model MC {
   id           String   @id @default(cuid())
-  nome         String
-  apelido      String?
+  nome         String?
+  apelido      String   @unique
   cidade       String?
+  estado       String?
   criadoEm     DateTime @default(now())
   atualizadoEm DateTime @default(now()) @updatedAt
   ativo        Boolean  @default(true)
@@ -133,8 +134,8 @@ model Session {
 
 model VerificationToken {
   identifier String
-  token      String @unique
-  expires DateTime
+  token      String   @unique
+  expires    DateTime
 
   @@unique([identifier, token])
 }
